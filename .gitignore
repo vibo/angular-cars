@@ -16,4 +16,5 @@ npm-debug.log
 .webpack.json
 
 .idea/
+.vscode/
 *.swp
