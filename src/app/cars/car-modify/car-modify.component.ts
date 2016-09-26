@@ -8,7 +8,13 @@ import { Car } from '../shared/car.model'
     selector: 'car-modify',
     template: `
         <div *ngIf="car">
-            <car-form></car-form>
+            <car-form 
+                [car]="car"
+                (onSetBrand)="setBrand($event)"
+                (onSetColor)="setColor($event)"
+                (onSetModel)="setModel($event)"
+            >
+            </car-form>
         </div>
     `
 })
@@ -29,5 +35,17 @@ export class CarModifyComponent implements OnInit {
                     .get(Number(params['id']))
                     .then(car => this.car = car);
             });
+    }
+
+    public setBrand(brand: string) {
+        this.car.brand = brand;
+    }
+
+    public setColor(color: string) {
+        this.car.color = color;
+    }
+
+    public setModel(model: string) {
+        this.car.model = model;
     }
 }
