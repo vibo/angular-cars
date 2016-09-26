@@ -8,7 +8,11 @@ import { CarService } from '../shared/car.service'
         <h2>Car list</h2>
 
         <div *ngFor="let car of cars">
-            {{ car.brand }} {{ car.model }} {{ car.color }}
+            {{ car.brand }} 
+            {{ car.model }} 
+            {{ car.color }}
+            <button (click)="modify(car.id)">Modify</button>
+            <button (click)="delete(car.id)">Delete</button>
         </div>
     `
 })
@@ -28,5 +32,13 @@ export class CarListComponent implements OnInit {
         return this.CarService
             .getAll()
             .then(cars => this.cars = cars);
+    }
+
+    public delete(id: number) {
+        
+    }
+
+    public modify(id: number) {
+
     }
 }
