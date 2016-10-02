@@ -3,4 +3,10 @@ export class Car {
     brand: string;
     model: string;
     color: string;
+
+    constructor() {
+        this.brand = "";
+        this.model = "";
+        this.color = "";
+    }
 }

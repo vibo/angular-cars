@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { Location } from '@angular/common'
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CarService } from '../shared/car.service'
 
@@ -7,6 +8,8 @@ import { Car } from '../shared/car.model'
 @Component({
     selector: 'car-modify',
     template: `
+        <h2>Modify</h2>
+        
         <div *ngIf="car">
             <car-form 
                 [car]="car"
@@ -15,6 +18,9 @@ import { Car } from '../shared/car.model'
                 (onSetModel)="setModel($event)"
             >
             </car-form>
+
+            <button (click)="modify()">Save</button>
+            <button (click)="close()">Close</button>
         </div>
     `
 })
@@ -23,7 +29,8 @@ export class CarModifyComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private CarService: CarService
+        private CarService: CarService,
+        private Location: Location
     ) {
     }
 
@@ -33,8 +40,18 @@ export class CarModifyComponent implements OnInit {
             .forEach((params: Params) => {
                 this.CarService
                     .get(Number(params['id']))
-                    .then(car => this.car = car);
+                    .then(car => this.car = Object.assign({}, car));
             });
+    }
+
+    public close() {
+        this.Location.back();
+    }
+
+    public modify() {
+        this.CarService
+            .modify(this.car)
+            .then(() => this.close());
     }
 
     public setBrand(brand: string) {

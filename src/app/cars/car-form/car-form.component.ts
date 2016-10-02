@@ -39,10 +39,10 @@ export class CarFormComponent implements OnInit {
     }
 
     setModel(model: string) {
-        this.onSetColor.emit(model)
+        this.onSetModel.emit(model)
     }
 
     setColor(color: string) {
-        this.onSetModel.emit(color)
+        this.onSetColor.emit(color)
     }
 }
